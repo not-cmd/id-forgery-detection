@@ -33,17 +33,20 @@ ENV/
 *.swp
 *.swo
 
-# Project specific
+# Project specific - Datasets and large files
 Datasets/
 Organized_Datasets/
 output/
-uploads/
-models/
-results/
 runs/
+large_files.tar.gz
+
+# Node modules and build
 frontend1/node_modules/
 frontend1/dist/
 frontend1/build/
+node_modules/
+/build
+/dist
 
 # Logs
 *.log
@@ -61,14 +64,12 @@ yarn-error.log*
 # System Files
 .DS_Store
 Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Datasets and large files
+# Model files - exclude most but keep essential ones
 *.pth
 *.pt
 *.onnx
@@ -76,9 +77,21 @@ pids
 *.h5
 *.hdf5
 *.pkl
-*.mp4
-*.avi
-*.mov
+!yolov8n.pt
+!models/yolov8n.pt
+
+# Keep essential directories
+!uploads/
+!results/
+!static/
+!templates/
+
+# Keep empty directories
+!uploads/.gitkeep
+!results/.gitkeep
+!static/.gitkeep
+
+# Compressed files
 *.zip
 *.tar
 *.gz
@@ -86,32 +99,11 @@ pids
 *.7z
 *.z01
 
-# Node
-.npm
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Build
-/build
-/dist
-
-# Large files
-*.zip
-*.tar
-*.gz
-*.7z
-
-# OS
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-
 # Project specific
-!uploads/.gitkeep
-!results/.gitkeep
+uploads/
+results/
+static/
+templates/
 
 # Exclude directories
 analysis_plots/
