@@ -1,0 +1,13 @@
+path: Organized_Datasets/signature_detection/Signature Detection  # dataset root dir
+train: train  # train images directory
+val: valid  # validation images directory
+test: test  # test images directory
+
+# Classes
+names:
+  0: signature
+
+# Training parameters
+epochs: 100
+batch_size: 16
+img_size: 640 

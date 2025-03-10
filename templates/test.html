@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Document Forgery Detection - Backend Test</h1>
+    
+    <div class="form-group">
+        <label for="document-type">Document Type:</label>
+        <select id="document-type">
+            <option value="id">ID Card</option>
+            <option value="signature">Signature</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="file">Upload Document:</label>
+        <input type="file" id="file" accept=".jpg,.jpeg,.png">
+    </div>
+    
+    <button onclick="uploadFile()">Analyze Document</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById('file');
+            const documentType = document.getElementById('document-type').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please select a file');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('document_type', documentType);
+            
+            resultDiv.innerHTML = 'Analyzing...';
+            resultDiv.style.display = 'block';
+            
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                resultDiv.innerHTML = `
+                    <h3>Analysis Result</h3>
+                    <p><strong>Document Type:</strong> ${data.document_type}</p>
+                    <p><strong>Is Forged:</strong> ${data.is_forged ? 'Yes' : 'No'}</p>
+                    <p><strong>Confidence:</strong> ${(data.confidence * 100).toFixed(2)}%</p>
+                    ${data.visualization_path ? `<img src="${data.visualization_path}" alt="Analysis Result" style="max-width: 100%;">` : ''}
+                `;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            });
+        }
+    </script>
+</body>
+</html> 

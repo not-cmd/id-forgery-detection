@@ -1,0 +1,14 @@
+path: Organized_Datasets/id_detection/MASK-RCNN-Dataset-master  # dataset root dir
+train: train  # train images directory
+val: val  # validation images directory
+test: test  # test images directory
+
+# Classes
+names:
+  0: genuine
+  1: forged
+
+# Training parameters
+epochs: 100
+batch_size: 16
+img_size: 640 

@@ -1,0 +1,1 @@
+{"version":2,"builds":[{"src":"id_forgery_app.py","use":"@vercel/python","config":{"runtime":"python3.9","installCommand":"pip install -r requirements.txt"}}],"routes":[{"src":"/(.*)","dest":"id_forgery_app.py"}],"env":{"MODEL_PATH":"models/yolov8n.pt","CONFIDENCE_THRESHOLD":"0.35"}}

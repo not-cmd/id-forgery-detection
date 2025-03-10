@@ -1,0 +1,9 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#f3f4f6"/>
+  <g transform="translate(175,120)">
+    <path d="M24 10h-10v-2h10v2zm0 4h-10v2h10v-2zm-10 6h10v-2h-10v2zm16-14v16c0 1.1-.9 2-2 2h-20c-1.1 0-2-.9-2-2v-16c0-1.1.9-2 2-2h20c1.1 0 2 .9 2 2zm-22 16h20v-16h-20v16z" fill="#9ca3af"/>
+    <text x="0" y="40" font-family="system-ui, -apple-system" font-size="14" fill="#6b7280" text-anchor="middle">
+      Image not available
+    </text>
+  </g>
+</svg> 

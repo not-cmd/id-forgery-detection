@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  physical_pipeline:
+    build:
+      context: ./document_forgery_detection
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./document_forgery_detection/data:/app/data:rw
+      - ./document_forgery_detection/results:/app/results:rw
+      - ./document_forgery_detection/config:/app/config:ro
+      - ./document_forgery_detection/temp:/app/temp:rw
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app
+      - TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata
+      - DOCKER_ENV=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+
+  digital_pipeline:
+    build:
+      context: ./document_forgery_detection
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./document_forgery_detection/data:/app/data:rw
+      - ./document_forgery_detection/results:/app/results:rw
+      - ./document_forgery_detection/config:/app/config:ro
+      - ./document_forgery_detection/temp:/app/temp:rw
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app
+      - TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata
+      - DOCKER_ENV=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+
+networks:
+  default:
+    name: forgery_detection_network 

@@ -1,0 +1,1 @@
+{"name":"id-forgery-detection","type":"python","entry":"id_forgery_app.py","python_version":"3.9","env":{"MODEL_PATH":"models/yolov8n.pt","CONFIDENCE_THRESHOLD":"0.35"}}

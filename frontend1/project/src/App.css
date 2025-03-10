@@ -1,0 +1,21 @@
+/* Additional custom styles can be added here */
+.upload-area {
+  border: 2px dashed #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.upload-area:hover, .upload-area.dragover {
+  border-color: #4f46e5;
+  background-color: #f8fafc;
+}
+
+.genuine {
+  background-color: #10b981;
+}
+
+.forged {
+  background-color: #ef4444;
+} 
