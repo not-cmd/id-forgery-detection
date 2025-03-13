@@ -1,13 +1,20 @@
 services:
   - type: web
     name: id-forgery-detection
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn id_forgery_app:app
+    env: docker
+    repo: https://github.com/not-cmd/id-forgery-detection.git
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    branch: main
+    healthCheckPath: /health
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: MODEL_PATH
-        value: models/yolov8n.pt
-      - key: CONFIDENCE_THRESHOLD
-        value: 0.35
+      - key: FLASK_APP
+        value: app.py
+      - key: FLASK_ENV
+        value: production
+    disk:
+      name: data
+      mountPath: /app/uploads
+      sizeGB: 1
+    autoDeploy: true
