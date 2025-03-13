@@ -2,7 +2,6 @@ services:
   - type: web
     name: id-forgery-detection
     env: docker
-    repo: https://github.com/not-cmd/id-forgery-detection.git
     dockerfilePath: ./Dockerfile
     dockerContext: .
     plan: free
