@@ -7,6 +7,7 @@ services:
     dockerContext: .
     plan: free
     branch: main
+    numInstances: 1
     healthCheckPath: /health
     envVars:
       - key: FLASK_APP
@@ -18,3 +19,5 @@ services:
       mountPath: /app/uploads
       sizeGB: 1
     autoDeploy: true
+    domains:
+      - id-forgery-detection.onrender.com
